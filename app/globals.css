@@ -249,6 +249,14 @@ h2 {
   font-weight: 600;
 }
 
+/* Mobile safety net: embedded media can never blow out the viewport */
+img,
+video,
+iframe,
+svg {
+  max-width: 100%;
+}
+
 /* ── Stage 1 · Foundation — base refinements ─────────────────────────────── */
 html,
 body {

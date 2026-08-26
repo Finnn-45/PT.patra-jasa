@@ -29,7 +29,7 @@ function HeroSlider() {
     {
       img: "https://www.patra-jasa.com/wp-content/uploads/2025/10/MyPatrahotel-Web-rev-800px-x-1536px-1.jpg",
       imgMobile:
-        "https://www.patra-jasa.com/wp-content/uploads/2025/10/MyPatrahotel-Web-rev-800px-x-1536px-1.jpg",
+        "https://patra-jasa.com/wp-content/uploads/2024/08/Mypatrahotels-web-mobile-scaled.jpg",
       href: "https://play.google.com/store/apps/details?id=my.patra.hotels",
       label: t("home.slides.0.label"),
       sub: t("home.slides.0.sub"),
@@ -37,7 +37,8 @@ function HeroSlider() {
     {
       img: "https://www.patra-jasa.com/wp-content/uploads/2025/10/easy-booking-1536-x-800-copy.jpg",
       imgMobile:
-        "https://patra-jasa.com/wp-content/uploads/2024/08/Mypatrahotels-web-mobile-scaled.jpg",
+        "https://www.patra-jasa.com/wp-content/uploads/2025/10/easy-booking-1536-x-800-copy.jpg",
+      imgMobilePos: "28% center",
       href: "https://mypatrahotels.com",
       label: t("home.slides.1.label"),
       sub: t("home.slides.1.sub"),
@@ -112,7 +113,8 @@ function HeroSlider() {
             alt={slides[current].label}
             fetchPriority={current === 0 ? "high" : undefined}
             decoding="async"
-            className="h-full w-full object-cover object-center md:hidden"
+            style={{ objectPosition: slides[current].imgMobilePos ?? "center" }}
+            className="h-full w-full object-cover md:hidden"
           />
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img

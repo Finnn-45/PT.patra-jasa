@@ -56,7 +56,7 @@ export default function TentangKami() {
 
         {/* Sub navigation */}
         <nav className="sticky top-16 z-40 border-b border-ash/15 bg-white shadow-sm" aria-label={t("tentang.eyebrow")}>
-          <div className="container-site overflow-x-auto">
+          <div className="container-site overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             <div className="flex gap-0 whitespace-nowrap">
               {aboutSubNav.map((l, i) => (
                 <Link key={l.key} href={l.href}
@@ -83,7 +83,7 @@ export default function TentangKami() {
             </div>
 
             {/* Company image */}
-            <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.9 }} className="media-frame mt-16 aspect-[16/7] w-full rounded-2xl overflow-hidden shadow-lg">
+            <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.9 }} className="media-frame mt-16 aspect-[16/10] w-full rounded-2xl overflow-hidden shadow-lg md:aspect-[16/7]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="https://www.patra-jasa.com/wp-content/uploads/2021/07/patrajasa.jpg" alt={t("tentang.imgAlt")} className="h-full w-full object-cover" />
             </motion.div>

@@ -64,7 +64,7 @@ export default function HotelsPage() {
         </section>
 
         <section className="section-pad border-b border-ash/10">
-          <div className="container-site grid grid-cols-3 gap-8">
+          <div className="container-site grid grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-8">
             {stats.map((s, i) => (
               <motion.div
                 key={s.label}
@@ -74,7 +74,7 @@ export default function HotelsPage() {
                 transition={{ delay: i * 0.08, duration: 0.6 }}
                 className="border-t border-patragreen-600/30 pt-6 text-center"
               >
-                <div className="t-metric text-patragreen-300">{s.value}</div>
+                <div className="t-metric text-patragreen-600">{s.value}</div>
                 <p className="t-caption mt-3 text-ash">{s.label}</p>
               </motion.div>
             ))}
