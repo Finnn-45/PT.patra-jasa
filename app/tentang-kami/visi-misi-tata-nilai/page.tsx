@@ -1,93 +1,143 @@
 "use client";
-import PageHero from "@/app/components/PageHero";
-import SectionTitle from "@/app/components/SectionTitle";
-import { motion, type Variants } from "motion/react";
 
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
-};
+import { motion } from "motion/react";
+import SiteNav from "@/components/system/SiteNav";
+import Footer from "@/app/components/Footer";
 
-const staggerContainer: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15 }
-  }
-};
-
-const values = [
-  { title: "Amanah", description: "Memegang teguh kepercayaan yang diberikan." },
-  { title: "Kompeten", description: "Terus belajar dan mengembangkan kapabilitas." },
-  { title: "Harmonis", description: "Saling peduli dan menghargai perbedaan." },
-  { title: "Loyal", description: "Berdedikasi dan mengutamakan kepentingan bangsa." },
-  { title: "Adaptif", description: "Terus berinovasi dan antusias menghadapi perubahan." },
-  { title: "Kolaboratif", description: "Membangun kerja sama yang sinergis." },
-];
+import { useI18n } from "@/components/i18n/LanguageProvider";
 
 export default function VisiMisiPage() {
+  const { t } = useI18n();
+
+  const values = [
+    { title: t("visi.v0"), description: t("visi.v0.desc") },
+    { title: t("visi.v1"), description: t("visi.v1.desc") },
+    { title: t("visi.v2"), description: t("visi.v2.desc") },
+    { title: t("visi.v3"), description: t("visi.v3.desc") },
+    { title: t("visi.v4"), description: t("visi.v4.desc") },
+    { title: t("visi.v5"), description: t("visi.v5.desc") },
+  ];
+
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-900 font-sans">
-      <PageHero
-        eyebrow="Tentang Kami"
-        title="Visi, Misi, dan"
-        titleAccent="Tata Nilai Patra Jasa"
-        description="Landasan budaya dan arah strategis perusahaan yang selaras dengan tujuan keberlanjutan dan pelayanan unggul."
-        variant="blue"
-      />
+    <main className="min-h-screen w-full bg-ink font-sans text-paper">
+      <div className="relative z-10">
+        <SiteNav />
 
-      <section className="max-w-6xl mx-auto px-6 lg:px-10 py-20">
-        <SectionTitle
-          eyebrow="Visi & Misi"
-          title="Landasan Strategis untuk Pertumbuhan yang Bertanggung Jawab"
-          description="Menegaskan tujuan korporat dan nilai operasional yang menjadi panduan Patra Jasa dalam menghadirkan layanan unggul bagi pelanggan dan pemangku kepentingan."
-          align="center"
-        />
+        <section className="relative flex min-h-[50vh] items-end overflow-hidden pb-16 pt-32 bg-white">
+          <div className="container-site relative z-10">
+            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }} className="t-eyebrow mb-3 text-patragreen-600 font-bold">{t("tentang.eyebrow")}</motion.p>
+            <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }} className="t-section max-w-2xl text-paper">
+              {t("visi.heroTitle")}
+            </motion.h1>
+            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, duration: 0.7 }} className="mt-4 max-w-xl text-base text-ash">
+              {t("visi.heroDesc")}
+            </motion.p>
+          </div>
+        </section>
 
-        <motion.div
-          initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}
-          className="mt-12 grid gap-8 lg:grid-cols-2"
-        >
-          <motion.div variants={fadeUp} className="rounded-3xl bg-white p-10 shadow-lg border border-slate-100">
-            <h2 className="text-2xl font-bold text-slate-900 mb-6">Visi</h2>
-            <p className="text-slate-600 leading-relaxed">Menjadi perusahaan pengembang properti dan penyedia layanan hospitality terkemuka di Indonesia yang menciptakan nilai tambah berkelanjutan.</p>
-          </motion.div>
+        <section className="section-pad border-t border-ash/10 bg-white">
+          <div className="container-site">
+            <p className="t-eyebrow mb-8 text-patragreen-600 font-bold">{t("visi.eyebrow")}</p>
+            <h2 className="t-section max-w-3xl mb-12 text-paper">{t("visi.title")}</h2>
+            <div className="grid gap-4 lg:grid-cols-2">
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="rounded-2xl border border-ash/15 bg-sand p-8 shadow-sm">
+                <h3 className="t-caption mb-4 text-patragreen-700 font-bold">{t("visi.visiLabel")}</h3>
+                <p className="text-base leading-relaxed text-ash">{t("visi.visiText")}</p>
+              </motion.div>
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1, duration: 0.6 }} className="rounded-2xl border border-ash/15 bg-sand p-8 shadow-sm">
+                <h3 className="t-caption mb-4 text-patragreen-700 font-bold">{t("visi.misiLabel")}</h3>
+                <ul className="list-disc space-y-3 pl-5 text-base leading-relaxed text-ash">
+                  <li>{t("visi.m1")}</li>
+                  <li>{t("visi.m2")}</li>
+                  <li>{t("visi.m3")}</li>
+                </ul>
+              </motion.div>
+            </div>
+          </div>
+        </section>
 
-          <motion.div variants={fadeUp} className="rounded-3xl bg-white p-10 shadow-lg border border-slate-100">
-            <h2 className="text-2xl font-bold text-slate-900 mb-6">Misi</h2>
-            <ul className="list-disc pl-6 space-y-4 text-slate-600 leading-relaxed">
-              <li>Menghadirkan produk properti yang inovatif dan berorientasi pada kepuasan pelanggan.</li>
-              <li>Memberikan layanan keramahtamahan bertaraf internasional yang memadukan budaya lokal.</li>
-              <li>Mengoptimalkan sinergi operasional demi memberikan keuntungan terbaik bagi stakeholders.</li>
-            </ul>
-          </motion.div>
-        </motion.div>
-      </section>
-
-      <section className="max-w-6xl mx-auto px-6 lg:px-10 py-20">
-        <SectionTitle
-          eyebrow="Tata Nilai"
-          title="AKHLAK sebagai Budaya Perusahaan"
-          description="Nilai-nilai Patra Jasa yang menjadi pedoman dalam pelayanan, etika kerja, dan kolaborasi internal dan eksternal."
-          align="left"
-        />
-
-        <motion.div
-          initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}
-          className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
-        >
-          {values.map((item) => (
-            <motion.div
-              key={item.title}
-              variants={fadeUp}
-              className="rounded-3xl bg-white p-8 shadow-lg border border-slate-100 hover:border-patra-blue-200 transition-colors min-h-[220px]"
+        {/* AKHLAK Section — Pertamina-style layout */}
+        <section className="section-pad border-t border-ash/10 bg-white">
+          <div className="container-site">
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="t-eyebrow mb-3 font-bold text-patragreen-600"
             >
-              <h3 className="text-xl font-bold text-patra-blue-400 mb-4">{item.title}</h3>
-              <p className="text-slate-600 leading-relaxed">{item.description}</p>
+              {t("visi.valuesEyebrow")}
+            </motion.p>
+            <motion.h2
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1, duration: 0.6 }}
+              className="t-section mb-10 text-paper"
+            >
+              {t("visi.valuesTitle")}
+            </motion.h2>
+
+            {/* Main AKHLAK Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.15, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="overflow-hidden rounded-3xl border border-ash/10 bg-white shadow-lg"
+            >
+              <div className="flex flex-col lg:flex-row">
+                {/* Left — Logo panel */}
+                <div
+                  className="flex flex-col items-center justify-center gap-5 p-10 lg:w-72 lg:shrink-0 lg:border-r lg:border-ash/10"
+                  style={{ background: "linear-gradient(160deg, #f8f9fc 0%, #eef2f8 100%)" }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/Web_Photo_Editor-4.webp"
+                    alt="Logo AKHLAK"
+                    className="h-auto w-48 object-contain"
+                  />
+                  <p className="text-center text-[10px] font-semibold uppercase tracking-widest leading-relaxed text-ash/70">
+                    Amanah · Kompeten · Harmonis<br />Loyal · Adaptif · Kolaboratif
+                  </p>
+                </div>
+
+                {/* Right — Values grid */}
+                <div className="flex-1 p-8 lg:p-10">
+                  <div className="grid grid-cols-1 gap-0 sm:grid-cols-2">
+                    {values.map((item, i) => {
+                      // AKH (0,1,2) = navy, LAK (3,4,5) = teal — matching the logo
+                      const isNavy = i < 3;
+                      const color = isNavy ? "#1e3770" : "#00b8d4";
+                      return (
+                        <motion.div
+                          key={item.title}
+                          initial={{ opacity: 0, x: -10 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: 0.2 + i * 0.07, duration: 0.5 }}
+                          className="group border-b border-ash/10 py-6 pr-6 last:border-b-0 sm:[&:nth-child(2n)]:border-l sm:[&:nth-child(2n)]:pl-6 sm:[&:nth-child(2n)]:pr-0"
+                        >
+                          <h3
+                            className="mb-1.5 text-sm font-black uppercase tracking-wider"
+                            style={{ color }}
+                          >
+                            {item.title}
+                          </h3>
+                          <p className="text-sm leading-relaxed text-ash">{item.description}</p>
+                        </motion.div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
             </motion.div>
-          ))}
-        </motion.div>
-      </section>
+          </div>
+        </section>
+
+        <Footer />
+      </div>
     </main>
   );
 }

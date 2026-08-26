@@ -39,39 +39,43 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --color-patra-blue-50: #E8EEFF;
-  --color-patra-blue-100: #C7D6FF;
-  --color-patra-blue-200: #A2B5FF;
-  --color-patra-blue-300: #7A90FF;
-  --color-patra-blue-400: #3251D1;
-  --color-patra-blue-500: #021E58; /* Patra Jasa brand blue */
-  --color-patra-blue-600: #02174B;
-  --color-patra-blue-700: #02123C;
-  --color-patra-blue-800: #020E30;
-  --color-patra-blue-900: #020B26;
-  --color-patra-blue-950: #02071C;
-  --color-patra-green-50: #ECF5D8;
-  --color-patra-green-100: #D7E8B5;
-  --color-patra-green-200: #B9D47B;
-  --color-patra-green-300: #8BB336;
-  --color-patra-green-400: #5C8B0F;
-  --color-patra-green-500: #35860E; /* Patra Jasa brand green */
-  --color-patra-green-600: #2F760D;
-  --color-patra-green-700: #25630C;
-  --color-patra-green-800: #1F520A;
-  --color-patra-green-900: #183F08;
-  --color-patra-green-950: #132F06;
-  --color-patra-red-50: #FFE6E5;
-  --color-patra-red-100: #FFC6C5;
-  --color-patra-red-200: #FF9A98;
-  --color-patra-red-300: #F86D5E;
-  --color-patra-red-400: #D92B27;
-  --color-patra-red-500: #D50305; /* Patra Jasa brand red */
-  --color-patra-red-600: #B50204;
-  --color-patra-red-700: #920303;
-  --color-patra-red-800: #760202;
-  --color-patra-red-900: #5B0202;
-  --color-patra-red-950: #420101;
+  /* ── Patra Jasa brand palette ────────────────────────────────
+     Primary accent: Red #ED1B2F · Science Blue #006CB8 · Lime #B7D731
+     Supporting: near-black #222222 text, white #FFFFFF surface,
+     light grey #EFEFEF containers.                                              */
+  --color-patra-blue-50: #E8F2FB;
+  --color-patra-blue-100: #C8E2F6;
+  --color-patra-blue-200: #96C8EE;
+  --color-patra-blue-300: #5EAAE3;
+  --color-patra-blue-400: #2C8CD2;
+  --color-patra-blue-500: #006CB8; /* Science Blue — trust & technology */
+  --color-patra-blue-600: #005C9C;
+  --color-patra-blue-700: #004C80;
+  --color-patra-blue-800: #003C66;
+  --color-patra-blue-900: #002D4E;
+  --color-patra-blue-950: #001F38;
+  --color-patra-green-50: #F5FBD9;
+  --color-patra-green-100: #EBF6B5;
+  --color-patra-green-200: #DCEE87;
+  --color-patra-green-300: #CAE459;
+  --color-patra-green-400: #B7D731; /* Lime green — sustainability */
+  --color-patra-green-500: #9BC31B;
+  --color-patra-green-600: #7EA014;
+  --color-patra-green-700: #627A11;
+  --color-patra-green-800: #4B5F0E;
+  --color-patra-green-900: #39470C;
+  --color-patra-green-950: #29330A;
+  --color-patra-red-50: #FDEBEC;
+  --color-patra-red-100: #FBD7DC;
+  --color-patra-red-200: #F7B0B9;
+  --color-patra-red-300: #F18692;
+  --color-patra-red-400: #F25163;
+  --color-patra-red-500: #ED1B2F; /* Primary brand red — energy & courage */
+  --color-patra-red-600: #C90F22;
+  --color-patra-red-700: #A30C1D;
+  --color-patra-red-800: #7E0B18;
+  --color-patra-red-900: #5D0A12;
+  --color-patra-red-950: #3D080F;
   --color-patra-yellow-50: #FFF7D7;
   --color-patra-yellow-100: #FFE9A6;
   --color-patra-yellow-200: #FFD370;
@@ -90,6 +94,67 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* ── PT Patra Jasa corporate system (light) ──────────────────────────
+     Clean, white-first surfaces (#FFFFFF) with near-black ink (#222222)
+     and the official brand red (#ED1B2F) as the single primary accent.
+     Editorial and corporate — light and pleasant to read. */
+  --color-ink: #ffffff;      /* page background (white) */
+  --color-coal: #ffffff;     /* solid white surface */
+  --color-charcoal: #efefef; /* light-grey container / card */
+  --color-graphite: #e6e6e6;
+  --color-stone: #8a94a0;
+  --color-ash: #4a545e;      /* secondary body text */
+  --color-linen: #f2f5f2;
+  --color-sand: #f6f8f6;
+  --color-paper: #222222;    /* primary text / wordmark (dark grey) */
+  --color-cream: #ffffff;
+  /* Primary accent = brand red scale (#ED1B2F) */
+  --color-patragreen-950: #3d080f;
+  --color-patragreen-900: #5d0a12;
+  --color-patragreen-800: #7e0b18;
+  --color-patragreen-700: #a30c1d;
+  --color-patragreen-600: #c90f22;
+  --color-patragreen-500: #ed1b2f; /* brand red */
+  --color-patragreen-400: #f25163;
+  --color-patragreen-300: #f18692;
+  --color-patragreen-200: #f7b0b9;
+  --color-patragreen-100: #fbd7dc;
+  --color-brass: #c9a53f;
+
+  /* Motion tokens */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-swift: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 180ms;
+  --dur-base: 320ms;
+  --dur-slow: 720ms;
+
+  /* Spacing tokens */
+  --space-gutter: clamp(1.25rem, 5vw, 4rem);
+  --space-section: clamp(4rem, 10vw, 8.5rem);
+  --space-inner: clamp(2.5rem, 6vw, 5rem);
+  --space-tight: clamp(1.25rem, 2.5vw, 2.25rem);
+}
+
+/* Formalised hover / micro-interaction primitives */
+.interactive-line {
+  position: relative;
+}
+.interactive-line::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.15em;
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s var(--ease-out-expo);
+}
+.interactive-line:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
 }
 
 :root {
@@ -182,4 +247,155 @@ h1 {
 }
 h2 {
   font-weight: 600;
+}
+
+/* ── Stage 1 · Foundation — base refinements ─────────────────────────────── */
+html,
+body {
+  overflow-x: clip;
+}
+/* Native anchor scrolling — smooth jumps without any JS cost. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+/* Skip layout/paint work for sections that are far offscreen.
+   Big win on long pages: the browser only renders what is visible. */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 640px;
+}
+/* Smooth scrolling is handled by Lenis (components/system/SmoothScroll). */
+[id] {
+  scroll-margin-top: 5.5rem;
+}
+::selection {
+  background: var(--color-patragreen-600);
+  color: var(--color-coal);
+}
+:focus-visible {
+  outline: 2px solid var(--color-patragreen-500);
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ── Stage 1 · Foundation — editorial type scale & surfaces ──────────────── */
+@layer components {
+  /* Kicker / section label */
+  .t-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 650;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+
+  /* Oversized display type for hero statements */
+  .t-display {
+    font-size: clamp(2.1rem, 7.5vw, 7.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    font-weight: 800;
+    text-wrap: balance;
+  }
+
+  /* Large section headings */
+  .t-section {
+    font-size: clamp(2.1rem, 4.6vw, 4rem);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    font-weight: 750;
+    text-wrap: balance;
+  }
+
+  /* Editorial body lead */
+  .t-lead {
+    font-size: clamp(1.1rem, 1.6vw, 1.45rem);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* Metric numerals — intentionally enormous */
+  .t-metric {
+    font-size: clamp(3.5rem, 9vw, 8rem);
+    line-height: 0.85;
+    letter-spacing: -0.05em;
+    font-weight: 850;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .t-caption {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  /* Fluid page container */
+  .container-site {
+    width: 100%;
+    margin-inline: auto;
+    max-width: 84rem;
+    padding-inline: clamp(1.25rem, 5vw, 4rem);
+  }
+
+  /* Hairline divider */
+  .divider-hair {
+    height: 1px;
+    border: 0;
+    background: color-mix(in srgb, var(--color-ash) 26%, transparent);
+  }
+
+  /* Section vertical rhythm */
+  .section-pad {
+    padding-block: var(--space-section);
+    padding-inline: var(--space-gutter);
+  }
+  .section-pad-tight {
+    padding-block: var(--space-inner);
+    padding-inline: var(--space-gutter);
+  }
+
+  /* ── Image treatment ──────────────────────────────────────────────
+     Editorial, architectural cropping: quiet, slightly desaturated,
+     warming to full colour and gently zooming on hover. A hairline frame
+     keeps imagery feeling crafted rather than template-like.          */
+  .media-frame {
+    position: relative;
+    overflow: hidden;
+  }
+  .media-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s var(--ease-out-expo);
+  }
+  .media-frame:hover img {
+    transform: scale(1.04);
+  }
+  .media-frame::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 1px solid color-mix(in srgb, var(--color-ash) 32%, transparent);
+    pointer-events: none;
+  }
+  /* Grayscale hover treatment used on thin media (unframed) */
+  .img-duotone {
+    filter: grayscale(1) contrast(1.05);
+    transition: filter 0.6s var(--ease-swift);
+  }
+  .img-duotone:hover {
+    filter: grayscale(0);
+  }
 }

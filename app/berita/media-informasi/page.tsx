@@ -1,50 +1,150 @@
-import Link from "next/link";
+"use client";
 
-const articles = [
-  {
-    slug: "patra-jasa-tanam-1-000-bibit-mangrove-perkuat-ketahanan-pesisir",
-    title: "Patra Jasa Tanam 1.000 Bibit Mangrove, Perkuat Ketahanan Pesisir",
-    summary: "Inisiatif restorasi pesisir sebagai bagian dari komitmen kami terhadap pelestarian lingkungan dan ketahanan wilayah.",
-    date: "7 Juli 2026",
-  },
-  {
-    slug: "patra-jasa-raih-dua-penghargaan-apq-awards-2026",
-    title: "Patra Jasa Raih Dua Penghargaan pada APQ Awards 2026",
-    summary: "Pengakuan untuk inovasi layanan dan kinerja operasional yang unggul.",
-    date: "15 Juni 2026",
-  },
-  {
-    slug: "patra-jasa-giz-percepat-transisi-energi",
-    title: "Patra Jasa – GIZ Percepat Transisi Energi",
-    summary: "Sinergi bersama GIZ untuk memperkuat pengembangan green building dan ekonomi rendah karbon.",
-    date: "7 Mei 2026",
-  },
-];
+import { useState } from "react";
+import { motion } from "motion/react";
+import SiteNav from "@/components/system/SiteNav";
+import Footer from "@/app/components/Footer";
+import Link from "next/link";
+import { ArrowRight, Calendar } from "lucide-react";
+import { useI18n } from "@/components/i18n/LanguageProvider";
+
+import { mediaNewsArticles, tjslArticles } from "@/lib/newsData";
+
+function newsHref(slug: string): string {
+  const map: Record<string, string> = {};
+  for (const list of [mediaNewsArticles, tjslArticles]) {
+    for (const a of list) if (a.externalUrl) map[a.slug] = a.externalUrl;
+  }
+  return map[slug] ?? `/berita/media-informasi/${slug}`;
+}
 
 export default function MediaInformasiPage() {
-  return (
-    <main className="min-h-screen bg-slate-50 text-slate-900 font-sans">
-      <section data-nav-theme="dark" className="relative overflow-hidden bg-patra-blue-500 py-28 text-white">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.16),_transparent_40%)]" />
-        <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-10">
-          <p className="text-sm uppercase tracking-[0.45em] text-patra-blue-100/80 mb-4">Media & Informasi</p>
-          <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">Berita terbaru dan insight resmi Patra Jasa.</h1>
-          <p className="mt-6 max-w-3xl text-lg text-white/90 leading-relaxed">Ikuti berita terbaru seputar kegiatan bisnis, kemitraan, dan inovasi perusahaan.</p>
-        </div>
-      </section>
+  const { t } = useI18n();
+  const [search, setSearch] = useState("");
 
-      <section className="max-w-6xl mx-auto px-6 lg:px-10 py-20">
-        <div className="grid gap-8">
-          {articles.map((item) => (
-            <article key={item.title} className="rounded-3xl bg-white p-10 shadow-lg border border-slate-100">
-              <p className="text-xs uppercase tracking-[0.32em] text-patra-blue-400 mb-4">{item.date}</p>
-              <h2 className="text-2xl font-bold text-slate-900 mb-4">{item.title}</h2>
-              <p className="text-slate-600 leading-relaxed">{item.summary}</p>
-              <Link href={`/berita/media-informasi/${item.slug}`} className="mt-8 inline-flex text-patra-blue-500 font-semibold hover:underline">Baca selengkapnya</Link>
-            </article>
-          ))}
-        </div>
-      </section>
+  const newsItems = mediaNewsArticles.map((item) => ({
+    ...item,
+    displayTitle: item.titleKey ? t(item.titleKey as any) : item.title,
+  }));
+
+  const filtered = newsItems.filter((item) => {
+    const q = search.toLowerCase().trim();
+    if (!q) return true;
+    return (
+      item.displayTitle.toLowerCase().includes(q) ||
+      item.excerpt.toLowerCase().includes(q) ||
+      item.date.toLowerCase().includes(q)
+    );
+  });
+
+  return (
+    <main className="min-h-screen w-full bg-ink font-sans text-paper">
+      <div className="relative z-10">
+        <SiteNav />
+
+        <section className="relative flex min-h-[50vh] items-end overflow-hidden pb-16 pt-32 bg-white">
+          <div className="container-site relative z-10">
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6 }}
+              className="t-eyebrow mb-3 text-patragreen-600 font-bold"
+            >
+              {t("berita.eyebrow")}
+            </motion.p>
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="t-section text-paper"
+            >
+              {t("mi.title")}
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.25, duration: 0.7 }}
+              className="mt-4 max-w-xl text-base text-ash"
+            >
+              {t("mi.desc")}
+            </motion.p>
+          </div>
+        </section>
+
+        {/* Sticky category tabs */}
+        <nav className="sticky top-16 z-40 border-b border-ash/15 bg-white shadow-sm">
+          <div className="container-site flex items-center justify-between gap-4">
+            <div className="flex gap-0">
+              <Link
+                href="/berita/media-informasi"
+                className="border-b-2 border-patragreen-600 px-5 py-4 text-xs font-bold uppercase tracking-wider text-patragreen-700 bg-patragreen-50/50"
+              >
+                {t("mi.tabMedia")}
+              </Link>
+              <Link
+                href="/berita/tjsl"
+                className="border-b-2 border-transparent px-5 py-4 text-xs font-bold uppercase tracking-wider text-ash hover:border-patragreen-500 hover:text-paper transition-all"
+              >
+                {t("mi.tabTjsl")}
+              </Link>
+            </div>
+            <input
+              type="search"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder={t("mi.search")}
+              className="w-48 rounded-full border border-ash/20 bg-linen px-4 py-2 text-xs text-paper placeholder:text-stone outline-none focus:border-patragreen-500 transition-colors hidden sm:block"
+            />
+          </div>
+        </nav>
+
+        {/* News grid */}
+        <section className="section-pad bg-sand">
+          <div className="container-site">
+            {filtered.length === 0 ? (
+              <div className="py-20 text-center text-ash">{t("mi.empty")}</div>
+            ) : (
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {filtered.map((item, i) => (
+                  <motion.article
+                    key={item.slug}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.06, duration: 0.6 }}
+                    className="group overflow-hidden rounded-2xl border border-ash/15 bg-white shadow-sm hover:border-patragreen-500/40 transition-colors flex flex-col"
+                  >
+                    <Link href={newsHref(item.slug)} target="_blank" rel="noopener noreferrer" className="media-frame aspect-[16/10] w-full block overflow-hidden">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={item.img} alt={item.displayTitle} loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                    </Link>
+                    <div className="flex flex-col flex-1 p-6">
+                      <div className="mb-3 flex items-center gap-2 text-xs text-ash">
+                        <Calendar className="h-3.5 w-3.5 text-patragreen-600" />
+                        {item.date}
+                      </div>
+                      <h2 className="text-base font-bold leading-snug text-paper group-hover:text-patragreen-700 transition-colors flex-1">
+                        <Link href={newsHref(item.slug)} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                          {item.displayTitle}
+                        </Link>
+                      </h2>
+                      <p className="mt-3 text-sm leading-relaxed text-ash line-clamp-3">{item.excerpt}</p>
+                      <Link
+                        href={newsHref(item.slug)} target="_blank" rel="noopener noreferrer"
+                        className="mt-5 inline-flex items-center gap-1.5 text-xs font-bold text-patragreen-600 hover:text-patragreen-700 transition-colors"
+                      >
+                        {t("common.bacaSelengkapnya")} <ArrowRight className="h-3.5 w-3.5" />
+                      </Link>
+                    </div>
+                  </motion.article>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+
+        <Footer />
+      </div>
     </main>
   );
 }

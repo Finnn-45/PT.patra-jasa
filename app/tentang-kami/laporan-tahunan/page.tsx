@@ -1,76 +1,57 @@
 "use client";
-import PageHero from "@/app/components/PageHero";
-import SectionTitle from "@/app/components/SectionTitle";
-import { motion, type Variants } from "motion/react";
 
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
-};
-
-const staggerContainer: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15 }
-  }
-};
-
-const reports = [
-  {
-    title: "Laporan Tahunan 2025",
-    description: "Ringkasan pencapaian finansial, operasional, dan keberlanjutan yang memperlihatkan arah strategis Patra Jasa.",
-    cta: "Unduh Ringkasan",
-  },
-  {
-    title: "Laporan Keberlanjutan",
-    description: "Dokumentasi inisiatif TJSL, ESG, dan dampak sosial yang mendukung pertumbuhan perusahaan yang bertanggung jawab.",
-    cta: "Pelajari Lebih",
-  },
-];
+import { motion } from "motion/react";
+import SiteNav from "@/components/system/SiteNav";
+import Footer from "@/app/components/Footer";
+import { FileText, Download } from "lucide-react";
+import { useI18n } from "@/components/i18n/LanguageProvider";
 
 export default function AnnualReportPage() {
+  const { t } = useI18n();
+
+  const reports = [
+    { title: t("laporan.0"), description: t("laporan.0.desc"), cta: t("laporan.0.cta") },
+    { title: t("laporan.1"), description: t("laporan.1.desc"), cta: t("laporan.1.cta") },
+  ];
+
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-900 font-sans">
-      <PageHero
-        eyebrow="Laporan Tahunan"
-        title="Rekaman Kinerja dan"
-        titleAccent="Inisiatif Tahunan"
-        description="Ringkasan pencapaian operasional, finansial, dan keberlanjutan yang mendukung pertumbuhan jangka panjang Patra Jasa."
-        variant="blue"
-      />
+    <main className="min-h-screen w-full bg-ink font-sans text-paper">
+      <div className="relative z-10">
+        <SiteNav />
 
-      <section className="max-w-6xl mx-auto px-6 lg:px-10 py-20">
-        <SectionTitle
-          eyebrow="Transparansi"
-          title="Laporan Tahunan yang Menjadi Dasar Keputusan"
-          description="Akses ringkasan laporan tahunan dan highlight kinerja yang menunjukkan arah strategis perusahaan dan komitmen terhadap stakeholder."
-          align="left"
-        />
+        <section className="relative flex min-h-[50vh] items-end overflow-hidden pb-16 pt-32 bg-white">
+          <div className="container-site relative z-10">
+            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }} className="t-eyebrow mb-3 text-patragreen-600 font-bold">{t("tentang.nav4")}</motion.p>
+            <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }} className="t-section max-w-2xl text-paper">
+              {t("laporan.heroTitle1")} <span className="text-patragreen-600">{t("laporan.heroTitle2")}</span>
+            </motion.h1>
+            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, duration: 0.7 }} className="mt-4 max-w-xl text-base text-ash">
+              {t("laporan.heroDesc")}
+            </motion.p>
+          </div>
+        </section>
 
-        <motion.div
-          initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}
-          className="mt-12 grid gap-8 lg:grid-cols-2"
-        >
-          {reports.map((report) => (
-            <motion.div
-              key={report.title}
-              variants={fadeUp}
-              className="rounded-3xl bg-white p-10 shadow-lg border border-slate-100 hover:border-patra-blue-200 transition-colors"
-            >
-              <div className="w-14 h-14 rounded-2xl bg-patra-blue-100 text-patra-blue-400 flex items-center justify-center mb-6">
-                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-              </div>
-              <h3 className="text-2xl font-bold text-slate-900 mb-4">{report.title}</h3>
-              <p className="text-slate-600 leading-relaxed mb-8">{report.description}</p>
-              <button className="inline-flex items-center gap-2 rounded-full bg-patra-blue-400 hover:bg-patra-blue-300 px-6 py-3 text-sm font-semibold text-white transition">
-                {report.cta}
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-              </button>
-            </motion.div>
-          ))}
-        </motion.div>
-      </section>
+        <section className="section-pad border-t border-ash/10 bg-sand">
+          <div className="container-site">
+            <p className="t-eyebrow mb-8 text-patragreen-600 font-bold">{t("laporan.eyebrow")}</p>
+            <h2 className="t-section max-w-3xl mb-12 text-paper">{t("laporan.title")}</h2>
+            <div className="grid gap-4 lg:grid-cols-2">
+              {reports.map((report, i) => (
+                <motion.div key={report.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08, duration: 0.6 }} className="rounded-2xl border border-ash/15 bg-white p-8 hover:border-patragreen-500/40 shadow-sm transition-colors">
+                  <div className="mb-6 grid h-14 w-14 place-items-center rounded-2xl bg-patragreen-50 border border-patragreen-200 text-patragreen-600"><FileText className="h-7 w-7" /></div>
+                  <h3 className="text-xl font-bold text-paper mb-3">{report.title}</h3>
+                  <p className="text-sm leading-relaxed text-ash mb-6">{report.description}</p>
+                  <button className="inline-flex items-center gap-2 rounded-full bg-patragreen-600 px-6 py-3 text-sm font-semibold text-white hover:bg-patragreen-500 transition-colors shadow-sm">
+                    {report.cta} <Download className="h-4 w-4" />
+                  </button>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <Footer />
+      </div>
     </main>
   );
 }

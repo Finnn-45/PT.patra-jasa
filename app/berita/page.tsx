@@ -1,150 +1,142 @@
 "use client";
+
+import { motion } from "motion/react";
+import SiteNav from "@/components/system/SiteNav";
+import Footer from "@/app/components/Footer";
 import Link from "next/link";
-import { motion, type Variants } from "motion/react";
-import PageHero from "@/app/components/PageHero";
-import SectionTitle from "@/app/components/SectionTitle";
-
-// ── Animasi ──────────────────────────────────────────────────────────────────
-
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
-};
-
-const staggerContainer: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15 }
-  }
-};
-
-// ── Data ──────────────────────────────────────────────────────────────────────
-
-const newsCategories = [
-  {
-    title: "Media & Informasi",
-    desc: "Berita seputar kegiatan operasional, kemitraan strategis, dan publikasi resmi yang menggambarkan komitmen Patra Jasa.",
-    img: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=2070&auto=format&fit=crop",
-    link: "/berita/media-informasi",
-    accent: "patra-blue",
-  },
-  {
-    title: "TJSL",
-    desc: "Cerita tentang inisiatif sosial, lingkungan, dan kolaborasi komunitas yang menjadi bagian dari tanggung jawab sosial perusahaan.",
-    img: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=2813&auto=format&fit=crop",
-    link: "/berita/tjsl",
-    accent: "patra-green",
-  },
-];
-
-const stats = [
-  { value: "120+", label: "Artikel Terbit" },
-  { value: "15", label: "Penghargaan" },
-  { value: "9", label: "Lokasi Kegiatan" },
-  { value: "30+", label: "Program TJSL" },
-];
-
-// ── Komponen ──────────────────────────────────────────────────────────────────
+import { ArrowRight, Newspaper } from "lucide-react";
+import { useI18n } from "@/components/i18n/LanguageProvider";
 
 export default function NewsPage() {
+  const { t } = useI18n();
+
+  const newsCategories = [
+    {
+      title: t("nav.media"),
+      desc: t("berita.catMedia.desc"),
+      link: "/berita/media-informasi",
+    },
+    {
+      title: t("nav.tjsl"),
+      desc: t("berita.catTjsl.desc"),
+      link: "/berita/tjsl",
+    },
+  ];
+
+  const stats = [
+    { value: "120+", label: t("berita.stats.0") },
+    { value: "15", label: t("berita.stats.1") },
+    { value: "9", label: t("berita.stats.2") },
+    { value: "30+", label: t("berita.stats.3") },
+  ];
+
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-900 font-sans overflow-hidden">
-      
-      {/* ── Hero Section ── */}
-      <PageHero
-        eyebrow="Berita"
-        title="Informasi korporat dan"
-        titleAccent="kegiatan sosial"
-        description="Update berita terbaru Patra Jasa seputar inovasi, penghargaan, TJSL, dan program keberlanjutan yang memperkuat komitmen kami terhadap masyarakat dan lingkungan."
-        variant="blue"
-        stats={stats}
-      />
+    <main className="min-h-screen w-full bg-ink font-sans text-paper">
+      <div className="relative z-10">
+        <SiteNav />
 
-      {/* ── Berita Kategori ── */}
-      <section className="max-w-6xl mx-auto px-6 lg:px-10 py-20">
-        <SectionTitle
-          eyebrow="Kategori Berita"
-          title="Jelajahi Kabar Terbaru Dari Kami."
-          align="left"
-        />
+        <section className="relative flex min-h-[55vh] items-end overflow-hidden pb-16 pt-32 bg-white">
+          <div className="container-site relative z-10">
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6 }}
+              className="t-eyebrow mb-3 text-patragreen-600 font-bold"
+            >
+              {t("berita.eyebrow")}
+            </motion.p>
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="t-section max-w-2xl text-paper"
+            >
+              {t("berita.title1")}{" "}
+              <span className="text-patragreen-600">{t("berita.title2")}</span>
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.25, duration: 0.7 }}
+              className="mt-4 max-w-xl text-base text-ash"
+            >
+              {t("berita.desc")}
+            </motion.p>
+          </div>
+        </section>
 
-        <div className="grid gap-8 md:grid-cols-2">
-          {newsCategories.map((item, idx) => {
-            const isBlue = item.accent === "patra-blue";
-            return (
-              <motion.article
-                key={item.title}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
-                variants={fadeUp}
-                transition={{ delay: idx * 0.15 }}
-                className="group rounded-3xl bg-white shadow-lg border border-slate-100 overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-500"
+        <section className="section-pad border-b border-ash/10 bg-sand">
+          <div className="container-site grid grid-cols-2 gap-8 lg:grid-cols-4">
+            {stats.map((s, i) => (
+              <motion.div
+                key={s.label}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08, duration: 0.6 }}
+                className="border-t border-patragreen-600/30 pt-6 text-center"
               >
-                {/* Image */}
-                <div className="relative h-64 overflow-hidden">
-                  <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 ease-out" />
-                  <div className={`absolute inset-0 bg-gradient-to-t ${isBlue ? "from-patra-blue-500/90 via-patra-blue-500/30" : "from-patra-green-600/90 via-patra-green-600/30"} to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500`} />
-                  
-                  <div className="absolute bottom-5 left-6">
-                    <h3 className={`text-2xl font-bold text-white drop-shadow-md inline-flex items-center gap-3`}>
-                      <span className={`w-2.5 h-2.5 rounded-full ${isBlue ? "bg-patra-blue-300" : "bg-patra-green-200"} animate-pulse`} />
-                      {item.title}
-                    </h3>
-                  </div>
-                </div>
+                <div className="t-metric text-patragreen-600">{s.value}</div>
+                <p className="t-caption mt-3 text-ash">{s.label}</p>
+              </motion.div>
+            ))}
+          </div>
+        </section>
 
-                {/* Body */}
-                <div className="p-10">
-                  <p className="text-slate-600 leading-relaxed mb-8 font-light">{item.desc}</p>
+        <section className="section-pad bg-white">
+          <div className="container-site">
+            <p className="t-eyebrow mb-8 text-patragreen-600 font-bold">{t("common.kategoriBerita")}</p>
+            <h2 className="t-section max-w-3xl mb-12 text-paper">{t("berita.kategoriTitle")}</h2>
+            <div className="grid gap-4 md:grid-cols-2">
+              {newsCategories.map((item, i) => (
+                <motion.article
+                  key={item.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08, duration: 0.6 }}
+                  className="group rounded-2xl border border-ash/15 bg-sand p-10 hover:border-patragreen-500/40 shadow-sm transition-colors"
+                >
+                  <div className="mb-6 grid h-14 w-14 place-items-center rounded-2xl bg-patragreen-50 border border-patragreen-200 text-patragreen-600">
+                    <Newspaper className="h-7 w-7" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-paper mb-3">{item.title}</h3>
+                  <p className="text-sm leading-relaxed text-ash mb-8">{item.desc}</p>
                   <Link
                     href={item.link}
-                    className={`inline-flex items-center gap-2 rounded-full ${isBlue ? "bg-patra-blue-400 hover:bg-patra-blue-300" : "bg-patra-green-500 hover:bg-patra-green-400"} px-7 py-3 text-sm font-semibold text-white transition shadow-lg`}
+                    className="inline-flex items-center gap-2 rounded-full bg-patragreen-600 px-6 py-3 text-sm font-semibold text-white hover:bg-patragreen-500 transition-colors shadow-sm"
                   >
-                    Lihat Berita {item.accent === "patra-blue" ? "Media" : "TJSL"}
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    {t("berita.lihatBerita")} <ArrowRight className="h-4 w-4" />
                   </Link>
-                </div>
-              </motion.article>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* ── CTA Section ── */}
-      <section className="bg-white py-20">
-        <div className="max-w-6xl mx-auto px-6 lg:px-10">
-          <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
-            className="relative overflow-hidden rounded-3xl bg-patra-blue-500 p-12 md:p-16 text-white shadow-2xl"
-          >
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(255,255,255,0.15),_transparent_45%),radial-gradient(circle_at_bottom_left,_rgba(50,81,209,0.5),_transparent_45%)]" />
-            <img 
-              src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop" 
-              alt="Kantor Patra Jasa"
-              className="absolute inset-0 w-full h-full object-cover opacity-15 mix-blend-luminosity"
-            />
-            
-            <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
-              <div className="max-w-2xl">
-                <h3 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">Tetap Terhubung Dengan Kami</h3>
-                <p className="text-white/85 leading-relaxed font-light text-lg">
-                  Dapatkan informasi terbaru seputar inovasi, program keberlanjutan, dan kegiatan Patra Jasa langsung dari sumber resmi.
-                </p>
-              </div>
-              <div className="flex flex-col sm:flex-row gap-4 flex-shrink-0">
-                <Link href="/kontak-kami" className="inline-flex items-center justify-center rounded-full bg-white px-7 py-4 text-sm font-bold text-slate-900 hover:bg-slate-100 transition shadow-lg">
-                  Hubungi Kami
-                </Link>
-                <Link href="/" className="inline-flex items-center justify-center rounded-full border border-white/30 bg-white/10 backdrop-blur-md px-7 py-4 text-sm font-bold text-white hover:bg-white/20 transition">
-                  Kembali ke Home
-                </Link>
-              </div>
+                </motion.article>
+              ))}
             </div>
-          </motion.div>
-        </div>
-      </section>
+          </div>
+        </section>
+
+        <section className="section-pad border-t border-ash/10 bg-sand">
+          <div className="container-site">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="rounded-3xl border border-patragreen-500/30 bg-gradient-to-br from-white to-patragreen-50/60 p-12 text-center shadow-lg"
+            >
+              <h2 className="t-section text-paper">{t("berita.ctaTitle")}</h2>
+              <p className="t-lead mx-auto mt-5 max-w-lg text-ash">{t("berita.ctaDesc")}</p>
+              <Link
+                href="/kontak-kami"
+                className="mt-8 inline-flex items-center gap-2 rounded-full bg-patragreen-600 px-8 py-3.5 text-sm font-bold text-white hover:bg-patragreen-500 transition-colors shadow-md"
+              >
+                {t("common.hubungiKami")} <ArrowRight className="h-4 w-4" />
+              </Link>
+            </motion.div>
+          </div>
+        </section>
+
+        <Footer />
+      </div>
     </main>
   );
 }

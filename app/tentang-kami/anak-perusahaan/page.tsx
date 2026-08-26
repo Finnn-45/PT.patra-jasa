@@ -1,65 +1,55 @@
 "use client";
-import PageHero from "@/app/components/PageHero";
-import SectionTitle from "@/app/components/SectionTitle";
-import { motion, type Variants } from "motion/react";
 
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
-};
-
-const staggerContainer: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15 }
-  }
-};
-
-const subsidiaries = [
-  { name: "Patra Hospitality", description: "Operasional hotel dan layanan tamu premium." },
-  { name: "Patra Facility Management", description: "Layanan manajemen fasilitas dan layanan operasional." },
-  { name: "Patra Energy & Property", description: "Sinergi pengelolaan aset dan properti yang produktif." },
-];
+import { motion } from "motion/react";
+import SiteNav from "@/components/system/SiteNav";
+import Footer from "@/app/components/Footer";
+import { Building2 } from "lucide-react";
+import { useI18n } from "@/components/i18n/LanguageProvider";
 
 export default function SubsidiariesPage() {
+  const { t } = useI18n();
+
+  const subsidiaries = [
+    { name: "Patra Hospitality", description: t("anak.0.desc") },
+    { name: "Patra Facility Management", description: t("anak.1.desc") },
+    { name: "Patra Energy & Property", description: t("anak.2.desc") },
+  ];
+
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-900 font-sans">
-      <PageHero
-        eyebrow="Anak Perusahaan"
-        title="Jaringan Anak Perusahaan yang"
-        titleAccent="Mendukung Ekosistem Bisnis"
-        description="Kumpulan anak perusahaan Patra Jasa yang berkontribusi dalam bidang properti, hospitality, dan layanan korporat."
-        variant="blue"
-      />
+    <main className="min-h-screen w-full bg-ink font-sans text-paper">
+      <div className="relative z-10">
+        <SiteNav />
 
-      <section className="max-w-6xl mx-auto px-6 lg:px-10 py-20">
-        <SectionTitle
-          eyebrow="Bisnis Terintegrasi"
-          title="Anak Perusahaan yang Memperkuat Jaringan Patra"
-          description="Kolaborasi unit bisnis yang mendukung keahlian dalam properti, hospitality, dan manajemen fasilitas untuk memberikan solusi komprehensif."
-          align="left"
-        />
+        <section className="relative flex min-h-[50vh] items-end overflow-hidden pb-16 pt-32 bg-white">
+          <div className="container-site relative z-10">
+            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }} className="t-eyebrow mb-3 text-patragreen-600 font-bold">{t("tentang.nav6")}</motion.p>
+            <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }} className="t-section max-w-2xl text-paper">
+              {t("anak.heroTitle1")} <span className="text-patragreen-600">{t("anak.heroTitle2")}</span>
+            </motion.h1>
+            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, duration: 0.7 }} className="mt-4 max-w-xl text-base text-ash">
+              {t("anak.heroDesc")}
+            </motion.p>
+          </div>
+        </section>
 
-        <motion.div
-          initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}
-          className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
-        >
-          {subsidiaries.map((company) => (
-            <motion.div
-              key={company.name}
-              variants={fadeUp}
-              className="rounded-3xl bg-white p-10 shadow-lg border border-slate-100 hover:border-patra-blue-200 transition-colors"
-            >
-              <div className="w-14 h-14 rounded-2xl bg-patra-blue-100 text-patra-blue-400 flex items-center justify-center mb-6">
-                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
-              </div>
-              <h3 className="text-2xl font-bold text-slate-900 mb-4">{company.name}</h3>
-              <p className="text-slate-600 leading-relaxed">{company.description}</p>
-            </motion.div>
-          ))}
-        </motion.div>
-      </section>
+        <section className="section-pad border-t border-ash/10 bg-sand">
+          <div className="container-site">
+            <p className="t-eyebrow mb-8 text-patragreen-600 font-bold">{t("anak.eyebrow")}</p>
+            <h2 className="t-section max-w-3xl mb-12 text-paper">{t("anak.title")}</h2>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {subsidiaries.map((company, i) => (
+                <motion.div key={company.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08, duration: 0.6 }} className="rounded-2xl border border-ash/15 bg-white p-8 hover:border-patragreen-500/40 shadow-sm transition-colors">
+                  <div className="mb-6 grid h-14 w-14 place-items-center rounded-2xl bg-patragreen-50 border border-patragreen-200 text-patragreen-600"><Building2 className="h-7 w-7" /></div>
+                  <h3 className="text-xl font-bold text-paper mb-3">{company.name}</h3>
+                  <p className="text-sm leading-relaxed text-ash">{company.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <Footer />
+      </div>
     </main>
   );
 }

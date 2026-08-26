@@ -1,74 +1,192 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "motion/react";
+import { MapPin, Phone, Mail } from "lucide-react";
+import { useI18n } from "@/components/i18n/LanguageProvider";
+import { cn } from "@/lib/utils";
+
+const footerGroups = [
+  {
+    key: "footer.about",
+    links: [
+      { key: "footer.l.tentang0", href: "/tentang-kami" },
+      { key: "footer.l.tentang1", href: "/tentang-kami/visi-misi-tata-nilai" },
+      { key: "footer.l.tentang2", href: "/tentang-kami/manajemen" },
+      { key: "footer.l.tentang3", href: "/tentang-kami/tata-kelola-perusahaan" },
+      { key: "footer.l.tentang4", href: "/tentang-kami/anak-perusahaan" },
+      { key: "footer.l.tentang5", href: "/tentang-kami/penghargaan" },
+    ],
+  },
+  {
+    key: "footer.bisnis",
+    links: [
+      { key: "nav.property", href: "/products/property-1" },
+      { key: "nav.hotels", href: "/products/hotels-resorts" },
+      { key: "nav.services", href: "/products/services" },
+    ],
+  },
+  {
+    key: "footer.berita",
+    links: [
+      { key: "nav.media", href: "/berita/media-informasi" },
+      { key: "nav.tjsl", href: "/berita/tjsl" },
+    ],
+  },
+  {
+    key: "footer.lainnya",
+    links: [
+      { key: "nav.karir", href: "/karir" },
+      { key: "nav.pengadaan", href: "/pengadaan" },
+      { key: "nav.kontak", href: "/kontak-kami" },
+      { key: "footer.l.lainnya3", href: "/kebijakan-privasi" },
+      { key: "footer.l.lainnya4", href: "https://www.danantaraindonesia.co.id/", external: true },
+    ],
+  },
+];
+
+type IconProps = { className?: string };
+
+function InstagramIcon({ className }: IconProps) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5.2" />
+      <circle cx="16.3" cy="6.9" r="1.05" />
+      <circle cx="12" cy="12" r="3.9" />
+    </svg>
+  );
+}
+
+function YouTubeIcon({ className }: IconProps) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" aria-hidden>
+      <rect x="2" y="2.2" width="20" height="13.6" rx="3.8" />
+      <path d="M8.6 9.4L12.6 12.4L8.6 15.4Z" fill="currentColor" />
+    </svg>
+  );
+}
+
+function LinkedInIcon({ className }: IconProps) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" aria-hidden>
+      <rect x="2.5" y="2.5" width="19" height="19" rx="4.2" />
+      <text x="12" y="15.6" textAnchor="middle" fontSize="9.5" fontWeight="700" fill="currentColor">in</text>
+    </svg>
+  );
+}
+
+function FacebookIcon({ className }: IconProps) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" aria-hidden>
+      <circle cx="12" cy="12" r="9.5" />
+      <text x="12" y="15.2" textAnchor="middle" fontSize="11.5" fontWeight="700" fill="currentColor">f</text>
+    </svg>
+  );
+}
+
+const socials = [
+  { icon: InstagramIcon, href: "https://www.instagram.com/patrajasa/", label: "Instagram" },
+  { icon: YouTubeIcon, href: "https://www.youtube.com/@patrajasa", label: "YouTube" },
+  { icon: LinkedInIcon, href: "https://www.linkedin.com/company/pt-patra-jasa/", label: "LinkedIn" },
+  { icon: FacebookIcon, href: "https://www.facebook.com/PatraJasaOfficial/", label: "Facebook" },
+];
 
 export default function Footer() {
+  const { t, lang, setLang } = useI18n();
   return (
-    <footer className="w-full bg-patra-blue-50 pt-16 pb-8 border-t border-patra-blue-200">
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8">
-        <div className="lg:col-span-2">
-          <img src="/logo.svg" alt="Patra Jasa" className="h-10 mb-6" />
-          <p className="text-slate-600 text-sm leading-relaxed mb-6 max-w-sm">
-            PT Patra Jasa merupakan anak perusahaan PT Pertamina (Persero) yang bergerak melalui 3 pilar bisnis: Property, Hotels & Resorts, dan Services.
-          </p>
-          <div className="flex gap-3">
-            {[
-              { label: 'LinkedIn', href: 'https://www.linkedin.com/company/pt-patra-jasa/' },
-              { label: 'Instagram', href: 'https://instagram.com/patrajasaofficial' },
-              { label: 'YouTube', href: 'https://www.youtube.com/channel/UCtQW2zM43-z7s0zSQkUn4EA' },
-              { label: 'Facebook', href: 'https://www.facebook.com/pajas.pt/' },
-            ].map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                target="_blank"
-                rel="noreferrer"
-                className="w-10 h-10 rounded-full bg-white border border-patra-blue-200 hover:bg-patra-blue-400 hover:text-white hover:border-patra-blue-400 flex items-center justify-center text-slate-600 transition-all shadow-sm"
+    <footer className="relative bg-[#0e2239] text-white" role="contentinfo">
+      <div className="h-[3px] w-full bg-gradient-to-r from-patragreen-500 via-patra-blue-500 to-patra-blue-700" aria-hidden />
+
+      <div className="container-site py-16">
+        <div className="grid gap-12 lg:grid-cols-[1.8fr_1fr_1fr_1fr_1fr]">
+          <div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://www.patra-jasa.com/wp-content/themes/patra-jasa/images/logo.svg"
+              alt="PT Patra Jasa"
+              width={180}
+              height={22}
+              className="mb-6 h-8 w-auto brightness-0 invert"
+            />
+            <p className="max-w-xs text-sm leading-relaxed text-[#9db1c3]">
+              {t("footer.desc")}
+            </p>
+
+            <div className="mt-8 space-y-3">
+              <div className="flex items-start gap-3 text-xs text-[#c3cfd9]">
+                <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-patragreen-400" /> {t("home.contact.address")}
+              </div>
+              <div className="flex items-center gap-3 text-xs text-[#c3cfd9]">
+                <Phone className="h-3.5 w-3.5 shrink-0 text-patragreen-400" /> {t("home.contact.phone")}
+              </div>
+              <div className="flex items-center gap-3 text-xs text-[#c3cfd9]">
+                <Mail className="h-3.5 w-3.5 shrink-0 text-patragreen-400" /> {t("home.contact.mail")}
+              </div>
+            </div>
+
+            <div className="mt-6 flex items-center gap-2.5">
+              {socials.map((s) => (
+                <motion.a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  whileHover={{ scale: 1.12, y: -2 }}
+                  className="grid h-9 w-9 place-items-center rounded-full border border-white/15 text-[#c3cfd9] hover:border-patragreen-500 hover:text-patragreen-300 transition-colors"
+                >
+                  <s.icon className="h-4 w-4" />
+                </motion.a>
+              ))}
+            </div>
+          </div>{footerGroups.map((col) => (
+            <div key={col.key}>
+              <p className="mb-5 text-[0.65rem] font-bold uppercase tracking-[0.24em] text-patragreen-300">
+                {t(col.key)}
+              </p>
+              <ul className="space-y-3">
+                {col.links.map((l) => (
+                  <li key={l.key}>
+                    <Link
+                      href={l.href}
+                      {...("external" in l && l.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                      className="interactive-line text-sm text-[#cfd8e2] hover:text-white transition-colors"
+                    >
+                      {t(l.key)}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 sm:flex-row">
+          <p className="text-xs text-[#7f8ba0]">{t("footer.copyright", { year: new Date().getFullYear() })}</p>
+          <div className="flex flex-wrap items-center justify-end gap-6">
+            <span className="text-xs text-[#7f8ba0]">{t("footer.subsidiary")}</span>
+            <div className="flex gap-2 text-[0.6rem] font-bold uppercase tracking-widest">
+              <button
+                onClick={() => setLang("id")}
+                className={cn(
+                  "rounded px-2 py-1 transition-colors cursor-pointer",
+                  lang === "id" ? "bg-patragreen-700/40 text-patragreen-300" : "text-[#7f8ba0] hover:text-white"
+                )}
               >
-                <span className="text-xs font-bold">{item.label[0]}</span>
-              </a>
-            ))}
+                ID
+              </button>
+              <button
+                onClick={() => setLang("en")}
+                className={cn(
+                  "rounded px-2 py-1 transition-colors cursor-pointer",
+                  lang === "en" ? "bg-patragreen-700/40 text-patragreen-300" : "text-[#7f8ba0] hover:text-white"
+                )}
+              >
+                EN
+              </button>
+            </div>
           </div>
         </div>
-
-        <div>
-          <h4 className="font-bold text-slate-900 mb-6 text-sm uppercase tracking-wider">Bisnis</h4>
-          <ul className="space-y-4 text-sm text-slate-600">
-            <li><Link href="/bisnis/property" className="hover:text-patra-blue-400 transition">Property</Link></li>
-            <li><Link href="/bisnis/hotels" className="hover:text-patra-blue-400 transition">Hotels & Resorts</Link></li>
-            <li><Link href="/bisnis/services" className="hover:text-patra-blue-400 transition">Services</Link></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 className="font-bold text-slate-900 mb-6 text-sm uppercase tracking-wider">Tentang</h4>
-          <ul className="space-y-4 text-sm text-slate-600">
-            <li><Link href="/tentang-kami" className="hover:text-patra-blue-400 transition">Profil Perusahaan</Link></li>
-            <li><Link href="/tentang-kami/visi-misi-tata-nilai" className="hover:text-patra-blue-400 transition">Visi Misi Tata Nilai</Link></li>
-            <li><Link href="/tentang-kami/laporan-tahunan" className="hover:text-patra-blue-400 transition">Laporan Tahunan</Link></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 className="font-bold text-slate-900 mb-6 text-sm uppercase tracking-wider">Kontak</h4>
-          <div className="space-y-4 text-sm text-slate-600">
-            <p className="flex items-center gap-3">
-              <span className="w-8 h-8 rounded-full bg-patra-blue-300/20 text-patra-blue-400 flex items-center justify-center flex-shrink-0 border border-patra-blue-300/30">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-              </span>
-              customercare@patra-jasa.com
-            </p>
-            <p className="flex items-center gap-3">
-              <span className="w-8 h-8 rounded-full bg-patra-blue-300/20 text-patra-blue-400 flex items-center justify-center flex-shrink-0 border border-patra-blue-300/30">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-              </span>
-              021 5270 282
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div className="max-w-[1440px] mx-auto mt-16 pt-8 border-t border-patra-blue-200 px-6 lg:px-10 flex flex-col md:flex-row justify-between items-center gap-4 text-[12px] text-slate-600">
-        <p>Copyright © 2024 Patra Jasa. All Rights Reserved</p>
-        <Link href="/kebijakan-privasi" className="hover:text-patra-blue-400 transition">Privacy Policy</Link>
       </div>
     </footer>
   );

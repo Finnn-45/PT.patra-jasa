@@ -1,48 +1,91 @@
+"use client";
+
+import { use } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import SiteNav from "@/components/system/SiteNav";
+import Footer from "@/app/components/Footer";
+import { useI18n } from "@/components/i18n/LanguageProvider";
+import { tjslArticles, mediaNewsArticles } from "@/lib/newsData";
+import { Calendar, ArrowLeft } from "lucide-react";
 
 interface PageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
-const stories = [
-  {
-    slug: "patra-jasa-dukung-inovasi-kapal-trash-skimmer-untuk-jaga-kebersihan-pesisir-bali",
-    title: "Patra Jasa Dukung Inovasi Kapal Trash Skimmer untuk Jaga Kebersihan Pesisir Bali",
-    date: "18 April 2026",
-    content: "Program TJSL Patra Jasa mendukung kebersihan pesisir Bali melalui teknologi trash skimmer dan edukasi masyarakat pada pelestarian laut.",
-  },
-  {
-    slug: "patra-jasa-berkontribusi-pada-pemulihan-ekonomi-lokal-melalui-pelatihan-kerja",
-    title: "Patra Jasa Berkontribusi Pada Pemulihan Ekonomi Lokal Melalui Pelatihan Kerja",
-    date: "2 April 2026",
-    content: "Inisiatif TJSL yang memberdayakan masyarakat lokal melalui program pelatihan keterampilan, mendukung ketahanan ekonomi masyarakat.",
-  },
-];
-
 export default function StoryPage({ params }: PageProps) {
-  const story = stories.find((item) => item.slug === params.slug);
+  const { slug } = use(params);
+  const { t } = useI18n();
+
+  const story =
+    tjslArticles.find((item) => item.slug === slug) ||
+    mediaNewsArticles.find((item) => item.slug === slug);
+
   if (!story) return notFound();
 
-  return (
-    <main className="min-h-screen bg-slate-50 font-sans text-slate-900">
-      <section data-nav-theme="dark" className="relative overflow-hidden bg-patra-green-600 py-28 text-white">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(255,255,255,0.18),_transparent_40%)]" />
-        <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-10">
-          <p className="text-sm uppercase tracking-[0.45em] text-patra-green-100/80 mb-4">TJSL</p>
-          <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">{story.title}</h1>
-          <p className="mt-6 text-lg text-white/90 leading-relaxed">{story.date}</p>
-        </div>
-      </section>
+  const title = story.titleKey ? t(story.titleKey as any) : story.title;
 
-      <section className="max-w-6xl mx-auto px-6 lg:px-10 py-20">
-        <div className="rounded-3xl bg-white p-10 shadow-lg border border-slate-100 space-y-8">
-          <p className="text-slate-600 leading-relaxed">{story.content}</p>
-          <div>
-            <Link href="/berita/tjsl" className="text-patra-green-500 font-semibold hover:underline">Kembali ke TJSL</Link>
+  return (
+    <main className="min-h-screen w-full bg-ink font-sans text-paper">
+      <div className="relative z-10">
+        <SiteNav />
+
+        {/* Hero */}
+        <section className="relative flex min-h-[55vh] items-end overflow-hidden pb-16 pt-32 bg-white">
+          <div className="container-site relative z-10">
+            <Link
+              href="/berita/tjsl"
+              className="mb-6 inline-flex items-center gap-2 rounded-full border border-ash/20 bg-sand px-4 py-2 text-xs font-bold text-ash hover:border-patragreen-500 hover:text-patragreen-700 transition-all shadow-sm"
+            >
+              <ArrowLeft className="h-3.5 w-3.5" /> {t("common.kembaliKeTjsl")}
+            </Link>
+            <div className="mb-4 flex flex-wrap items-center gap-3">
+              <span className="rounded-full bg-patragreen-50 border border-patragreen-200 px-3.5 py-1 text-xs font-bold text-patragreen-700">
+                {story.category}
+              </span>
+              <span className="flex items-center gap-1.5 text-xs text-ash">
+                <Calendar className="h-3.5 w-3.5 text-patragreen-600" />
+                {story.date}
+              </span>
+            </div>
+            <h1 className="t-section max-w-4xl text-paper">{title}</h1>
           </div>
-        </div>
-      </section>
+        </section>
+
+        {/* Body content */}
+        <section className="section-pad border-t border-ash/10 bg-sand">
+          <div className="container-site max-w-4xl">
+            {story.img && (
+              <div className="mb-10 overflow-hidden rounded-2xl border border-ash/15 bg-white shadow-md">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={story.img}
+                  alt={title}
+                  className="max-h-[480px] w-full object-cover"
+                />
+              </div>
+            )}
+            <div className="rounded-2xl border border-ash/15 bg-white p-8 md:p-12 shadow-sm">
+              <p className="text-lg leading-relaxed text-paper font-medium mb-6">
+                {story.excerpt}
+              </p>
+              <div className="prose max-w-none text-base leading-relaxed text-ash whitespace-pre-line border-t border-ash/10 pt-6">
+                {story.content}
+              </div>
+            </div>
+            <div className="mt-10">
+              <Link
+                href="/berita/tjsl"
+                className="inline-flex items-center gap-2 rounded-full bg-patragreen-600 px-6 py-3 text-sm font-bold text-white hover:bg-patragreen-500 transition-all shadow-md"
+              >
+                <ArrowLeft className="h-4 w-4" /> {t("common.kembaliKeTjsl")}
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        <Footer />
+      </div>
     </main>
   );
 }

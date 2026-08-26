@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import { Roboto, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+import Shell from "./components/Shell";
+import { LanguageProvider } from "@/components/i18n/LanguageProvider";
 
 const roboto = Roboto({
   variable: "--font-roboto",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "700"],
+  weight: ["300", "400", "500", "700", "900"],
 });
 
 const geistMono = Geist_Mono({
@@ -23,13 +23,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="en"
+      lang="id"
       className={`${roboto.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Navbar />
-        {children}
-        <Footer />
+        <LanguageProvider>
+          <Shell>{children}</Shell>
+        </LanguageProvider>
       </body>
     </html>
   );
