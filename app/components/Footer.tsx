@@ -98,8 +98,8 @@ export default function Footer() {
       <div className="h-[3px] w-full bg-gradient-to-r from-patragreen-500 via-patra-blue-500 to-patra-blue-700" aria-hidden />
 
       <div className="container-site py-16">
-        <div className="grid gap-12 lg:grid-cols-[1.8fr_1fr_1fr_1fr_1fr]">
-          <div>
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.8fr_1fr_1fr_1fr_1fr] lg:gap-12">
+          <div className="col-span-full sm:col-span-2 lg:col-span-1">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="https://www.patra-jasa.com/wp-content/themes/patra-jasa/images/logo.svg"

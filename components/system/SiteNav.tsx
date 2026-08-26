@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
-import { ChevronDown, Menu, X, Search } from "lucide-react";
+import { ChevronDown, Menu, X, Search, Phone, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/components/i18n/LanguageProvider";
 
@@ -99,10 +99,10 @@ export default function SiteNav({ className }: { className?: string }) {
                     <div>
                       <button
                         onClick={() => setMobileExpanded(mobileExpanded === l.key ? null : l.key)}
-                        className="flex w-full items-center justify-between py-4 text-xl font-bold uppercase tracking-tight text-paper"
+                        className="flex w-full items-center justify-between py-4 text-lg font-bold uppercase tracking-tight text-paper transition-colors"
                       >
                         {t(l.key)}
-                        <ChevronDown className={cn("h-5 w-5 text-ash transition-transform", mobileExpanded === l.key && "rotate-180")} />
+                        <ChevronDown className={cn("h-5 w-5 text-stone transition-transform", mobileExpanded === l.key && "rotate-180")} />
                       </button>
                       <AnimatePresence>
                         {mobileExpanded === l.key && (
@@ -115,7 +115,7 @@ export default function SiteNav({ className }: { className?: string }) {
                           >
                             {l.children.map((c) => (
                               <Link key={c.key} href={c.href} onClick={() => setOpen(false)}
-                                className="block py-2.5 pl-4 text-base text-ash hover:text-patragreen-300 transition-colors">
+                                className="block rounded-lg py-3 pl-4 text-base font-medium text-ash hover:text-patragreen-600 active:bg-patragreen-50 transition-colors">
                                 {t(c.key)}
                               </Link>
                             ))}
@@ -126,7 +126,10 @@ export default function SiteNav({ className }: { className?: string }) {
                   ) : (
                     <Link href={l.href} onClick={() => setOpen(false)}
                       {...(l.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                      className="flex items-center justify-between py-4 text-xl font-bold uppercase tracking-tight text-paper hover:text-patragreen-300 transition-colors"
+                      className={cn(
+                        "flex items-center justify-between py-4 text-lg font-bold uppercase tracking-tight text-paper transition-colors",
+                        l.key === "nav.danantara" && "text-patragreen-600"
+                      )}
                     >
                       {t(l.key)}
                     </Link>
@@ -156,11 +159,27 @@ export default function SiteNav({ className }: { className?: string }) {
                 EN — English
               </button>
             </div>
+            {/* Contact shortcuts */}
+            <div className="mt-8 space-y-2.5">
+              <a
+                href={`tel:${t("home.contact.phone").replace(/[^+\d]/g, "")}`}
+                className="flex items-center gap-3 rounded-xl border border-graphite px-4 py-3 text-sm font-medium text-paper active:bg-sand transition-colors"
+              >
+                <Phone className="h-4 w-4 shrink-0 text-patragreen-600" /> {t("home.contact.phone")}
+              </a>
+              <a
+                href={`mailto:${t("home.contact.mail")}`}
+                className="flex items-center gap-3 rounded-xl border border-graphite px-4 py-3 text-sm font-medium text-paper break-all active:bg-sand transition-colors"
+              >
+                <Mail className="h-4 w-4 shrink-0 text-patragreen-600" /> {t("home.contact.mail")}
+              </a>
+            </div>
+
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.55 }}
-              className="t-caption mt-6 text-ash"
+              className="t-caption mt-6 text-stone"
             >
               {t("nav.mobileHighlights")}
             </motion.p>

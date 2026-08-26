@@ -68,8 +68,26 @@ function HeroSlider() {
     exit: (d: number) => ({ x: d > 0 ? "-100%" : "100%", opacity: 0 }),
   };
 
+  const touchX = useRef<number | null>(null);
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchX.current = e.touches[0]?.clientX ?? null;
+  };
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (touchX.current === null) return;
+    const dx = e.changedTouches[0]?.clientX - touchX.current;
+    touchX.current = null;
+    if (dx === undefined || Math.abs(dx) < 48) return;
+    if (dx < 0) go((current + 1) % slidesCount, 1);
+    else go((current - 1 + slidesCount) % slidesCount, -1);
+  };
+
   return (
-    <section className="relative h-screen w-full overflow-hidden">
+    <section
+      className="relative h-[100svh] w-full overflow-hidden"
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+    >
       <AnimatePresence initial={false} custom={direction} mode="sync">
         <motion.div
           key={current}
@@ -99,8 +117,8 @@ function HeroSlider() {
             transition={{ delay: 0.4, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="absolute inset-x-0 bottom-28 container-site"
           >
-            <p className="t-eyebrow mb-3 text-patragreen-300">
-              <span className="inline-block h-px w-8 bg-patragreen-300/70 mr-3 align-middle" />
+            <p className="t-eyebrow mb-3 text-patragreen-200">
+              <span className="inline-block h-px w-8 bg-patragreen-200/70 mr-3 align-middle" />
               {slides[current].sub}
             </p>
             <h1 className="t-display text-white drop-shadow-md">{slides[current].label}</h1>
@@ -113,7 +131,7 @@ function HeroSlider() {
               >
                 <Link
                   href={slides[current].href}
-                  className="inline-flex items-center gap-2 rounded-full bg-patragreen-500 px-6 py-3 text-sm font-semibold text-white hover:bg-patragreen-400 transition-colors"
+                  className="inline-flex items-center gap-2 rounded-full bg-patragreen-500 px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-black/20 hover:bg-patragreen-400 transition-colors active:scale-[0.98]"
                 >
                   {t("common.lihatSelengkapnya")} <ArrowRight className="h-4 w-4" />
                 </Link>
@@ -123,26 +141,33 @@ function HeroSlider() {
         </motion.div>
       </AnimatePresence>
 
-      {/* Controls */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-5 z-10">
+      {/* Controls — swipe-friendly dots on mobile, arrows on desktop */}
+      <div className="absolute bottom-9 left-1/2 z-10 flex -translate-x-1/2 items-center gap-1.5">
         {slides.map((_, i) => (
           <button
             key={i}
             onClick={() => go(i, i > current ? 1 : -1)}
-            className={`h-0.5 transition-all duration-500 rounded-full ${i === current ? "w-10 bg-patragreen-400" : "w-4 bg-white/40 hover:bg-white"}`}
-          />
+            aria-label={`Slide ${i + 1}`}
+            className="p-2"
+          >
+            <span
+              className={`block h-1 rounded-full transition-all duration-500 ${
+                i === current ? "w-8 bg-white" : "w-3 bg-white/40 hover:bg-white/70"
+              }`}
+            />
+          </button>
         ))}
       </div>
       <button
         onClick={() => go((current - 1 + slidesCount) % slidesCount, -1)}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-10 grid h-11 w-11 place-items-center rounded-full border border-white/30 text-white hover:bg-white/25 hover:border-white/60 transition-colors bg-black/45"
+        className="absolute left-4 top-1/2 hidden -translate-y-1/2 z-10 md:grid h-11 w-11 place-items-center rounded-full border border-white/30 text-white hover:bg-white/25 hover:border-white/60 transition-colors bg-black/45"
         aria-label={t("common.slideSebelumnya")}
       >
         <ChevronLeft className="h-5 w-5" />
       </button>
       <button
         onClick={() => go((current + 1) % slidesCount, 1)}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-10 grid h-11 w-11 place-items-center rounded-full border border-white/30 text-white hover:bg-white/25 hover:border-white/60 transition-colors bg-black/45"
+        className="absolute right-4 top-1/2 hidden -translate-y-1/2 z-10 md:grid h-11 w-11 place-items-center rounded-full border border-white/30 text-white hover:bg-white/25 hover:border-white/60 transition-colors bg-black/45"
         aria-label={t("common.slideBerikutnya")}
       >
         <ChevronRight className="h-5 w-5" />
@@ -479,20 +504,20 @@ function ContactSection() {
                 </p>
                 <p className="text-sm text-paper">{t("home.contact.address")}</p>
               </div>
-              <div className="flex gap-4">
-                <div className="flex-1 rounded-xl bg-white p-5 shadow-sm ring-1 ring-black/5">
-                  <p className="text-xs font-bold uppercase tracking-widest text-patragreen-700 mb-1">
-                    {t("home.contact.telepon")}
-                  </p>
-                  <p className="text-sm text-paper">{t("home.contact.phone")}</p>
-                </div>
-                <div className="flex-1 rounded-xl bg-white p-5 shadow-sm ring-1 ring-black/5">
-                  <p className="text-xs font-bold uppercase tracking-widest text-patragreen-700 mb-1">
-                    {t("home.contact.email")}
-                  </p>
-                  <p className="text-sm text-paper">{t("home.contact.mail")}</p>
-                </div>
+            <div className="mt-8 grid grid-cols-2 gap-4">
+              <div className="rounded-xl bg-white p-5 shadow-sm ring-1 ring-black/5">
+                <p className="text-xs font-bold uppercase tracking-widest text-patragreen-700 mb-1">
+                  {t("home.contact.telepon")}
+                </p>
+                <p className="text-sm text-paper">{t("home.contact.phone")}</p>
               </div>
+              <div className="rounded-xl bg-white p-5 shadow-sm ring-1 ring-black/5">
+                <p className="text-xs font-bold uppercase tracking-widest text-patragreen-700 mb-1">
+                  {t("home.contact.email")}
+                </p>
+                <p className="break-all text-sm text-paper">{t("home.contact.mail")}</p>
+              </div>
+            </div>
             </div>
           </motion.div>
           {/* Form */}
