@@ -53,7 +53,7 @@ function CorporateNavbar() {
         </div>
         <a
           href="#kontak"
-          className="rounded-full bg-[#ED1B2F] px-4 py-2 text-sm font-bold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-[#F25163]"
+          className="rounded-full bg-[#128549] px-4 py-2 text-sm font-bold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-[#17A057]"
         >
           {t("c3d.nav.cta")}
         </a>
@@ -74,7 +74,7 @@ function Hero() {
         className="relative z-10 max-w-3xl"
       >
         <motion.div variants={fadeUp} className="mb-6 inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-4 py-2 backdrop-blur-md">
-          <span className="h-2 w-2 rounded-full bg-[#ED1B2F] animate-pulse" />
+          <span className="h-2 w-2 rounded-full bg-[#128549] animate-pulse" />
           <span className="text-xs font-bold uppercase tracking-[0.25em] text-white/90">
             {t("c3d.badge")}
           </span>
@@ -86,7 +86,7 @@ function Hero() {
         >
           {t("c3d.hero.title1")}
           <br />
-          <span className="bg-gradient-to-r from-[#ED1B2F] via-[#F25163] to-[#EACE6C] bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-[#128549] via-[#17A057] to-[#EACE6C] bg-clip-text text-transparent">
             {t("c3d.hero.title2")}
           </span>
         </motion.h1>
@@ -98,7 +98,7 @@ function Hero() {
         <motion.div variants={fadeUp} className="mt-10 flex flex-col gap-4 sm:flex-row">
           <a
             href="#bisnis"
-            className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#ED1B2F] px-8 py-4 font-bold text-white shadow-[0_10px_40px_-10px_rgba(237,27,47,0.7)] transition hover:-translate-y-1 hover:bg-[#F25163]"
+            className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#128549] px-8 py-4 font-bold text-white shadow-[0_10px_40px_-10px_rgba(18,133,73,0.7)] transition hover:-translate-y-1 hover:bg-[#17A057]"
           >
             {t("c3d.hero.cta1")}
             <ArrowRight className="h-5 w-5 transition group-hover:translate-x-1" />
@@ -275,7 +275,7 @@ function Media() {
               className="flex flex-col justify-between rounded-3xl border border-white/15 bg-white/10 p-7 backdrop-blur-xl"
             >
               <div>
-                <span className="inline-block rounded-full bg-[#ED1B2F] px-3 py-1 text-xs font-bold uppercase tracking-wider text-white">
+                <span className="inline-block rounded-full bg-[#128549] px-3 py-1 text-xs font-bold uppercase tracking-wider text-white">
                   {m.tag}
                 </span>
                 <h3 className="mt-4 text-xl font-bold leading-snug text-white">{m.title}</h3>

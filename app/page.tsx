@@ -380,7 +380,7 @@ function VideoSection() {
             />
             <div className="absolute inset-0 grid place-items-center bg-black/25">
               <span className="grid h-16 w-16 place-items-center rounded-full bg-white/95 shadow-xl">
-                <svg viewBox="0 0 24 24" className="ml-1 h-6 w-6 fill-[#c90f22]" aria-hidden>
+                <svg viewBox="0 0 24 24" className="ml-1 h-6 w-6 fill-[#005C9C]" aria-hidden>
                   <path d="M8 5v14l11-7z" />
                 </svg>
               </span>
@@ -503,7 +503,7 @@ function ContactSection() {
       className="section-pad cv-auto relative overflow-hidden text-paper"
       style={{ background: "linear-gradient(180deg, var(--color-sand) 0%, var(--color-linen) 100%)" }}
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(237,27,47,0.06),transparent_60%)]" aria-hidden />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(18,133,73,0.07),transparent_60%)]" aria-hidden />
       <div className="container-site relative z-10">
         <div className="grid gap-16 lg:grid-cols-2 lg:items-start">
           {/* Info */}

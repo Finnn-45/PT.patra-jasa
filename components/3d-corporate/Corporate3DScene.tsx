@@ -10,7 +10,7 @@ import {
 import * as THREE from "three";
 
 /* ── Patra Jasa corporate palette ─────────────────────────────────────────── */
-const RED = "#ED1B2F";
+const RED = "#128549";
 const GREEN = "#B7D731";
 const BLUE = "#006CB8";
 const NAVY = "#003C66";

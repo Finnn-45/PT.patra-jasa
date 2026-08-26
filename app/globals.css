@@ -40,7 +40,7 @@
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
   /* ── Patra Jasa brand palette ────────────────────────────────
-     Primary accent: Red #ED1B2F · Science Blue #006CB8 · Lime #B7D731
+     Accents: Fresh Green (primary) · Science Blue — no red.
      Supporting: near-black #222222 text, white #FFFFFF surface,
      light grey #EFEFEF containers.                                              */
   --color-patra-blue-50: #E8F2FB;
@@ -65,17 +65,6 @@
   --color-patra-green-800: #4B5F0E;
   --color-patra-green-900: #39470C;
   --color-patra-green-950: #29330A;
-  --color-patra-red-50: #FDEBEC;
-  --color-patra-red-100: #FBD7DC;
-  --color-patra-red-200: #F7B0B9;
-  --color-patra-red-300: #F18692;
-  --color-patra-red-400: #F25163;
-  --color-patra-red-500: #ED1B2F; /* Primary brand red — energy & courage */
-  --color-patra-red-600: #C90F22;
-  --color-patra-red-700: #A30C1D;
-  --color-patra-red-800: #7E0B18;
-  --color-patra-red-900: #5D0A12;
-  --color-patra-red-950: #3D080F;
   --color-patra-yellow-50: #FFF7D7;
   --color-patra-yellow-100: #FFE9A6;
   --color-patra-yellow-200: #FFD370;
@@ -96,8 +85,8 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 
   /* ── PT Patra Jasa corporate system (light) ──────────────────────────
-     Clean, white-first surfaces (#FFFFFF) with near-black ink (#222222)
-     and the official brand red (#ED1B2F) as the single primary accent.
+     Clean, white-first surfaces (#FFFFFF) with near-black ink (#222222),
+     and a green + blue accent pairing — no red anywhere.
      Editorial and corporate — light and pleasant to read. */
   --color-ink: #ffffff;      /* page background (white) */
   --color-coal: #ffffff;     /* solid white surface */
@@ -109,17 +98,17 @@
   --color-sand: #f6f8f6;
   --color-paper: #222222;    /* primary text / wordmark (dark grey) */
   --color-cream: #ffffff;
-  /* Primary accent = brand red scale (#ED1B2F) */
-  --color-patragreen-950: #3d080f;
-  --color-patragreen-900: #5d0a12;
-  --color-patragreen-800: #7e0b18;
-  --color-patragreen-700: #a30c1d;
-  --color-patragreen-600: #c90f22;
-  --color-patragreen-500: #ed1b2f; /* brand red */
-  --color-patragreen-400: #f25163;
-  --color-patragreen-300: #f18692;
-  --color-patragreen-200: #f7b0b9;
-  --color-patragreen-100: #fbd7dc;
+  /* Primary accent = fresh green scale · secondary = science blue */
+  --color-patragreen-950: #062b1a;
+  --color-patragreen-900: #0a4026;
+  --color-patragreen-800: #0d5430;
+  --color-patragreen-700: #0f6b3c;
+  --color-patragreen-600: #128549; /* primary green */
+  --color-patragreen-500: #17a057;
+  --color-patragreen-400: #45ba7d;
+  --color-patragreen-300: #7fd0a6;
+  --color-patragreen-200: #ade3c6;
+  --color-patragreen-100: #d8f1e3;
   --color-brass: #c9a53f;
 
   /* Motion tokens */

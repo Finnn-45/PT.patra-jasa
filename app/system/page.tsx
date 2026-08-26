@@ -24,12 +24,12 @@ const fills = [
 ];
 
 const greens = [
-  { name: "PatraRed 700", value: "#a30c1d", cls: "bg-patragreen-700" },
-  { name: "PatraRed 600", value: "#c90f22", cls: "bg-patragreen-600" },
-  { name: "PatraRed 500", value: "#ed1b2f", cls: "bg-patragreen-500" },
-  { name: "PatraRed 400", value: "#f25163", cls: "bg-patragreen-400" },
-  { name: "PatraRed 300", value: "#f18692", cls: "bg-patragreen-300" },
-  { name: "PatraRed 100", value: "#fbd7dc", cls: "bg-patragreen-100 text-ink" },
+  { name: "PatraGreen 700", value: "#0f6b3c", cls: "bg-patragreen-700" },
+  { name: "PatraGreen 600", value: "#128549", cls: "bg-patragreen-600" },
+  { name: "PatraGreen 500", value: "#17a057", cls: "bg-patragreen-500" },
+  { name: "PatraGreen 400", value: "#45ba7d", cls: "bg-patragreen-400" },
+  { name: "PatraGreen 300", value: "#7fd0a6", cls: "bg-patragreen-300 text-paper" },
+  { name: "PatraGreen 100", value: "#d8f1e3", cls: "bg-patragreen-100 text-ink" },
 ];
 
 export default function SystemPage() {
