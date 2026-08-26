@@ -24,22 +24,28 @@ function HeroSlider() {
   const [direction, setDirection] = useState(0);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  // Hero slides from patra-jasa.com
+  // Hero slides from patra-jasa.com — each has dedicated desktop & mobile art
   const slides = [
     {
       img: "https://www.patra-jasa.com/wp-content/uploads/2025/10/MyPatrahotel-Web-rev-800px-x-1536px-1.jpg",
+      imgMobile:
+        "https://www.patra-jasa.com/wp-content/uploads/2025/10/MyPatrahotel-Web-rev-800px-x-1536px-1.jpg",
       href: "https://play.google.com/store/apps/details?id=my.patra.hotels",
       label: t("home.slides.0.label"),
       sub: t("home.slides.0.sub"),
     },
     {
       img: "https://www.patra-jasa.com/wp-content/uploads/2025/10/easy-booking-1536-x-800-copy.jpg",
+      imgMobile:
+        "https://patra-jasa.com/wp-content/uploads/2024/08/Mypatrahotels-web-mobile-scaled.jpg",
       href: "https://mypatrahotels.com",
       label: t("home.slides.1.label"),
       sub: t("home.slides.1.sub"),
     },
     {
       img: "https://www.patra-jasa.com/wp-content/uploads/2026/04/WebDesktop_Banner-Website_Home_PatraJasa.jpg",
+      imgMobile:
+        "https://www.patra-jasa.com/wp-content/uploads/2026/04/MobilePhone_Banner-Website_Home_PatraJasa-copy.jpg",
       href: "/tentang-kami",
       label: t("home.slides.2.label"),
       sub: t("home.slides.2.sub"),
@@ -99,23 +105,36 @@ function HeroSlider() {
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           className="absolute inset-0"
         >
+          {/* Dedicated mobile & desktop art so nothing gets cropped oddly */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={slides[current].imgMobile}
+            alt={slides[current].label}
+            fetchPriority={current === 0 ? "high" : undefined}
+            decoding="async"
+            className="h-full w-full object-cover object-center md:hidden"
+          />
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={slides[current].img}
             alt={slides[current].label}
-            fetchPriority={current === 0 ? "high" : undefined}
             decoding="async"
-            className="h-full w-full object-cover object-center"
+            className="hidden h-full w-full object-cover object-center md:block"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/10 to-transparent" />
+          {/* Light scrim on mobile (banner art stays clean & readable),
+              stronger directional scrim on desktop for the copy overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/35 to-transparent md:hidden" />
+          <div className="absolute inset-0 hidden bg-gradient-to-t from-black/80 via-black/25 to-transparent md:block" />
+          <div className="absolute inset-0 hidden bg-gradient-to-r from-black/50 via-black/10 to-transparent md:block" />
 
-          {/* Slide content */}
+          {/* Slide content — desktop banners are plain art, so we overlay copy.
+              Mobile banners already carry their own baked-in message,
+              so the overlay stays hidden there to avoid double text. */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute inset-x-0 bottom-28 container-site"
+            className="absolute inset-x-0 bottom-28 hidden md:block container-site"
           >
             <p className="t-eyebrow mb-3 text-patragreen-200">
               <span className="inline-block h-px w-8 bg-patragreen-200/70 mr-3 align-middle" />
