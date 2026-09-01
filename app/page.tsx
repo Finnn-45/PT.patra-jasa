@@ -1,8 +1,8 @@
 "use client";
+import SiteNav from "@/components/system/SiteNav";
 
 import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import SiteNav from "@/components/system/SiteNav";
 import Footer from "@/app/components/Footer";
 import Link from "next/link";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
@@ -10,11 +10,7 @@ import { useI18n } from "@/components/i18n/LanguageProvider";
 import { mediaNewsArticles, tjslArticles } from "@/lib/newsData";
 
 function newsHref(slug: string): string {
-  const map: Record<string, string> = {};
-  for (const list of [mediaNewsArticles, tjslArticles]) {
-    for (const a of list) if (a.externalUrl) map[a.slug] = a.externalUrl;
-  }
-  return map[slug] ?? `/berita/media-informasi/${slug}`;
+  return `/berita/media-informasi/${slug}`;
 }
 
 /* ── Hero slider ─────────────────────────────────────────────────────── */
@@ -465,7 +461,7 @@ function NewsSection() {
               transition={{ delay: i * 0.08, duration: 0.6 }}
               className="group flex flex-col overflow-hidden rounded-2xl bg-white ring-1 ring-black/5 shadow-sm transition-all duration-500 hover:shadow-xl hover:shadow-black/10 hover:-translate-y-1.5"
             >
-              <Link href={newsHref(item.slug)} target="_blank" rel="noopener noreferrer" className="media-frame aspect-[16/10] w-full block overflow-hidden">
+              <Link href={newsHref(item.slug)} className="media-frame aspect-[16/10] w-full block overflow-hidden">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={item.img} alt={item.title} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
               </Link>
@@ -477,12 +473,12 @@ function NewsSection() {
                   <span className="text-xs text-stone">{item.date}</span>
                 </div>
                 <h3 className="text-base font-semibold leading-snug text-paper group-hover:text-patragreen-700 transition-colors flex-1">
-                  <Link href={newsHref(item.slug)} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                  <Link href={newsHref(item.slug)} className="hover:underline">
                     {item.title}
                   </Link>
                 </h3>
                 <Link
-                  href={newsHref(item.slug)} target="_blank" rel="noopener noreferrer"
+                  href={newsHref(item.slug)}
                   className="interactive-line inline-flex items-center gap-1.5 self-start text-xs font-bold uppercase tracking-wider text-patragreen-600 transition-colors mt-auto pt-4"
                 >
                   {t("common.bacaSelengkapnya")} <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />

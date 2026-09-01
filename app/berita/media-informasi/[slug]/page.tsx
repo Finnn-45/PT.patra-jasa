@@ -1,9 +1,9 @@
 "use client";
+import SiteNav from "@/components/system/SiteNav";
 
 import { use } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import SiteNav from "@/components/system/SiteNav";
 import Footer from "@/app/components/Footer";
 import { useI18n } from "@/components/i18n/LanguageProvider";
 import { mediaNewsArticles, tjslArticles } from "@/lib/newsData";

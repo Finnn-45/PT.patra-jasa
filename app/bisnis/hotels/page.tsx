@@ -1,7 +1,7 @@
 "use client";
+import SiteNav from "@/components/system/SiteNav";
 
 import { motion } from "motion/react";
-import SiteNav from "@/components/system/SiteNav";
 import Footer from "@/app/components/Footer";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";

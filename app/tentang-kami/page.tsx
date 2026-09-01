@@ -1,9 +1,9 @@
 "use client";
+import SiteNav from "@/components/system/SiteNav";
 
 import { motion } from "motion/react";
-import SiteNav from "@/components/system/SiteNav";
 import Footer from "@/app/components/Footer";
-import Link from "next/link";
+import TentangSubnav from "@/components/system/TentangSubnav";
 import { ArrowRight } from "lucide-react";
 import { useI18n } from "@/components/i18n/LanguageProvider";
 
@@ -55,19 +55,7 @@ export default function TentangKami() {
         </section>
 
         {/* Sub navigation */}
-        <nav className="sticky top-16 z-40 border-b border-ash/15 bg-white shadow-sm" aria-label={t("tentang.eyebrow")}>
-          <div className="container-site overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            <div className="flex gap-0 whitespace-nowrap">
-              {aboutSubNav.map((l, i) => (
-                <Link key={l.key} href={l.href}
-                  className={`border-b-2 px-4 py-4 text-xs font-bold uppercase tracking-wider transition-all ${i === 0 ? "border-patragreen-600 text-patragreen-700 bg-patragreen-50/50" : "border-transparent text-ash hover:border-patragreen-500 hover:text-paper"}`}
-                >
-                  {t(l.key)}
-                </Link>
-              ))}
-            </div>
-          </div>
-        </nav>
+                <TentangSubnav />
 
         {/* Main content */}
         <section className="section-pad bg-white">

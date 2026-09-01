@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Roboto, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Shell from "./components/Shell";
+import Preloader from "./components/Preloader";
 import { LanguageProvider } from "@/components/i18n/LanguageProvider";
 
 const roboto = Roboto({
@@ -27,6 +28,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${roboto.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <Preloader />
         <LanguageProvider>
           <Shell>{children}</Shell>
         </LanguageProvider>

@@ -1,7 +1,7 @@
 "use client";
+import SiteNav from "@/components/system/SiteNav";
 
 import { motion } from "motion/react";
-import SiteNav from "@/components/system/SiteNav";
 import Footer from "@/app/components/Footer";
 import { MapPin, Mail, Phone, Send, ArrowRight } from "lucide-react";
 import { useI18n } from "@/components/i18n/LanguageProvider";
@@ -10,9 +10,9 @@ export default function ContactPage() {
   const { t } = useI18n();
 
   const contactCards = [
-    { title: t("kontak.0.title"), desc: t("kontak.0.desc"), icon: <MapPin className="h-7 w-7" />, href: "https://maps.google.com/?q=Jl.+Jend.+Gatot+Subroto+No.2,+Jakarta+Selatan", cta: t("common.lihatDiPeta") },
+    { title: t("kontak.0.title"), desc: t("kontak.0.desc"), icon: <MapPin className="h-7 w-7" />, href: "https://maps.google.com/?q=Patra+Jasa+Office+Tower,+Jl.+Jend.+Gatot+Subroto+Kav.+32-34,+Jakarta+Selatan+12950", cta: t("common.lihatDiPeta") },
     { title: t("kontak.1.title"), desc: t("kontak.1.desc"), icon: <Mail className="h-7 w-7" />, href: "mailto:customer.care@patra-jasa.com", cta: t("common.kirimEmail") },
-    { title: t("kontak.2.title"), desc: t("kontak.2.desc"), icon: <Phone className="h-7 w-7" />, href: "tel:+622152170282", cta: t("common.hubungiKami") },
+    { title: t("kontak.2.title"), desc: t("kontak.2.desc"), icon: <Phone className="h-7 w-7" />, href: "tel:+62215217108", cta: t("common.hubungiKami") },
   ];
 
   const socials = [

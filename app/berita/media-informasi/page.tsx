@@ -1,8 +1,8 @@
 "use client";
+import SiteNav from "@/components/system/SiteNav";
 
 import { useState } from "react";
 import { motion } from "motion/react";
-import SiteNav from "@/components/system/SiteNav";
 import Footer from "@/app/components/Footer";
 import Link from "next/link";
 import { ArrowRight, Calendar } from "lucide-react";
@@ -11,11 +11,7 @@ import { useI18n } from "@/components/i18n/LanguageProvider";
 import { mediaNewsArticles, tjslArticles } from "@/lib/newsData";
 
 function newsHref(slug: string): string {
-  const map: Record<string, string> = {};
-  for (const list of [mediaNewsArticles, tjslArticles]) {
-    for (const a of list) if (a.externalUrl) map[a.slug] = a.externalUrl;
-  }
-  return map[slug] ?? `/berita/media-informasi/${slug}`;
+  return `/berita/media-informasi/${slug}`;
 }
 
 export default function MediaInformasiPage() {
@@ -114,7 +110,7 @@ export default function MediaInformasiPage() {
                     transition={{ delay: i * 0.06, duration: 0.6 }}
                     className="group overflow-hidden rounded-2xl border border-ash/15 bg-white shadow-sm hover:border-patragreen-500/40 transition-colors flex flex-col"
                   >
-                    <Link href={newsHref(item.slug)} target="_blank" rel="noopener noreferrer" className="media-frame aspect-[16/10] w-full block overflow-hidden">
+                    <Link href={newsHref(item.slug)} className="media-frame aspect-[16/10] w-full block overflow-hidden">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img src={item.img} alt={item.displayTitle} loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
                     </Link>
@@ -124,13 +120,13 @@ export default function MediaInformasiPage() {
                         {item.date}
                       </div>
                       <h2 className="text-base font-bold leading-snug text-paper group-hover:text-patragreen-700 transition-colors flex-1">
-                        <Link href={newsHref(item.slug)} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                        <Link href={newsHref(item.slug)} className="hover:underline">
                           {item.displayTitle}
                         </Link>
                       </h2>
                       <p className="mt-3 text-sm leading-relaxed text-ash line-clamp-3">{item.excerpt}</p>
                       <Link
-                        href={newsHref(item.slug)} target="_blank" rel="noopener noreferrer"
+                        href={newsHref(item.slug)}
                         className="mt-5 inline-flex items-center gap-1.5 text-xs font-bold text-patragreen-600 hover:text-patragreen-700 transition-colors"
                       >
                         {t("common.bacaSelengkapnya")} <ArrowRight className="h-3.5 w-3.5" />

@@ -1,7 +1,8 @@
 "use client";
+import TentangSubnav from "@/components/system/TentangSubnav";
+import SiteNav from "@/components/system/SiteNav";
 
 import { motion } from "motion/react";
-import SiteNav from "@/components/system/SiteNav";
 import Footer from "@/app/components/Footer";
 import { FileText, Download } from "lucide-react";
 import { useI18n } from "@/components/i18n/LanguageProvider";
@@ -18,6 +19,7 @@ export default function AnnualReportPage() {
     <main className="min-h-screen w-full bg-ink font-sans text-paper">
       <div className="relative z-10">
         <SiteNav />
+        <TentangSubnav />
 
         <section className="relative flex min-h-[50vh] items-end overflow-hidden pb-16 pt-32 bg-white">
           <div className="container-site relative z-10">
